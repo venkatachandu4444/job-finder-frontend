@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+   <head>
+      <meta charset="utf-8"/>
+      <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+      <title>Explore Jobs - JobFinder</title>
+      <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+      <link href="https://fonts.googleapis.com" rel="preconnect"/>
+      <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+      <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+      <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+      <script>
+         tailwind.config = {
+           darkMode: "class",
+           theme: {
+             extend: {
+               colors: {
+                 "primary": "#4fe830",
+                 "background-light": "#f6f8f6",
+                 "background-dark": "#142111",
+               },
+               fontFamily: {
+                 "display": ["Manrope", "sans-serif"]
+               },
+               borderRadius: {
+                 "DEFAULT": "0.5rem",
+                 "lg": "1rem",
+                 "xl": "1.5rem",
+                 "full": "9999px"
+               },
+             },
+           },
+         }
+      </script>
+      <style>
+         body {
+         background-image: linear-gradient(120deg, #1e3a19, #142111 35%, #142111 65%, #1e3a19);
+         background-repeat: no-repeat;
+         }
+         .glassmorphism {
+         background-color: rgba(255, 255, 255, 0.1);
+         backdrop-filter: blur(12px);
+         -webkit-backdrop-filter: blur(12px);
+         border: 1px solid rgba(255, 255, 255, 0.15);
+         }
+      </style>
+   </head>
+   <body class="font-display bg-background-dark text-white">
+      <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden p-4 sm:p-6 md:p-8">
+         <div class="layout-container flex h-full grow flex-col items-center">
+            <div class="layout-content-container flex w-full max-w-6xl flex-1 flex-col gap-8">
+               <!-- TopNavBar -->
+               <header class="glassmorphism flex w-full items-center justify-between whitespace-nowrap rounded-xl px-6 py-4">
+                  <div class="flex items-center gap-4">
+                     <div class="size-6 text-primary">
+                        <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                           <path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                     </div>
+                     <h2 class="text-xl font-bold leading-tight tracking-[-0.015em] text-white">JobFinder</h2>
+                  </div>
+                  <div class="hidden items-center gap-9 md:flex">
+                     <a class="text-sm font-medium leading-normal text-white/80 transition-colors hover:text-white" href="index.html">Home</a>
+                     <a class="text-sm font-medium leading-normal text-white" href="explore.html">Explore Jobs</a>
+                     <a class="text-sm font-medium leading-normal text-white/80 transition-colors hover:text-white" href="about.html">About Us</a>
+                  </div>
+               </header>
+               <main class="flex w-full flex-1 flex-col gap-8 py-5">
+                  <div class="flex items-center justify-between gap-4">
+                     <!-- Back Button -->
+                     <button class="glassmorphism flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 gap-2 pl-3 text-sm font-bold leading-normal tracking-[0.015em] text-white/80 transition-colors hover:bg-white/10 hover:text-white">
+                     <span class="material-symbols-outlined text-xl"><a href="index.html">arrow_back</a></span>
+                     <span class="truncate"><a href="index.html">Back</a></span>
+                     </button>
+                  </div>
+                  <!-- PageHeading -->
+                  <div class="glassmorphism flex flex-wrap justify-between gap-3 rounded-xl p-6 sm:p-8">
+                     <div class="flex min-w-72 flex-col gap-3">
+                        <p class="text-4xl font-black leading-tight tracking-[-0.033em] text-white">Explore All Jobs</p>
+                        <p class="text-base font-normal leading-normal text-white/70">Browse all available job openings updated daily.</p>
+                     </div>
+                  </div>
+                  <!-- Table Container -->
+                  <div class="glassmorphism w-full flex-1 overflow-hidden rounded-xl">
+                     <div class="w-full overflow-x-auto">
+                        <table class="min-w-full text-left">
+                           <thead class="border-b border-white/10">
+                              <tr>
+                                 <th class="px-6 py-4 text-sm font-medium leading-normal text-white">Job Title</th>
+                                 <th class="px-6 py-4 text-sm font-medium leading-normal text-white">Company</th>
+                                 <th class="px-6 py-4 text-sm font-medium leading-normal text-white">Location</th>
+                                 <th class="px-6 py-4 text-sm font-medium leading-normal text-white">Closing Date</th>
+                                 <th class="px-6 py-4 text-sm font-medium leading-normal text-white">Action</th>
+                              </tr>
+                           </thead>
+                           <tbody id="exploreTableBody"></tbody>
+                        </table>
+                        <!-- Loading State Example -->
+                        <!-- <div class="flex items-center justify-center p-20">
+                           <div class="h-12 w-12 animate-spin rounded-full border-4 border-primary/30 border-t-primary"></div>
+                           </div> -->
+                        <!-- Empty State Example -->
+                        <!-- <div class="flex items-center justify-center p-20">
+                           <div class="glassmorphism flex flex-col items-center gap-4 rounded-xl p-8 text-center">
+                              <span class="material-symbols-outlined text-5xl text-white/50">work_off</span>
+                              <p class="text-lg font-semibold text-white">No job listings available right now.</p>
+                              <p class="text-sm text-white/70">Please check back later.</p>
+                           </div>
+                           </div> -->
+                     </div>
+                  </div>
+               </main>
+            </div>
+         </div>
+      </div>
+   </body>
+   <script>
+      async function loadAllJobs() {
+         const url = "https://job-finder-5kr0.onrender.com/api/all-jobs";
+
+         try {
+            const response = await fetch(url);
+            const jobs = await response.json();
+
+            const tableBody = document.getElementById("exploreTableBody");
+            tableBody.innerHTML = "";
+
+            if (!jobs || jobs.length === 0) {
+                  tableBody.innerHTML = `
+                     <tr>
+                        <td colspan="5" class="text-center py-6 text-brand-text-green text-lg">
+                              No jobs available right now.
+                        </td>
+                     </tr>`;
+                  return;
+            }
+
+            jobs.forEach(job => {
+                  const closeDate = job.registration_close_date || "Closes Soon";
+
+                  tableBody.innerHTML += `
+                     <tr class="table-row-glass border-t border-brand-subtle/30">
+                        <td class="px-6 py-4 text-white text-sm font-semibold">${job.title}</td>
+                        <td class="px-6 py-4 text-brand-text-green text-sm">${job.company || "Unknown"}</td>
+                        <td class="px-6 py-4 text-brand-text-green text-sm">${job.location}</td>
+                        <td class="px-6 py-4 text-brand-text-green text-sm">${closeDate}</td>
+                        <td class="px-6 py-4">
+                              <a href="${job.source_link}" target="_blank">
+                                 <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary/20 text-primary text-sm font-bold tracking-wide transition-all hover:bg-primary hover:text-background-dark">
+                                    Apply
+                                 </button>
+                              </a>
+                        </td>
+                     </tr>
+                  `;
+            });
+
+         } catch (error) {
+            console.error("Error loading jobs:", error);
+
+            document.getElementById("exploreTableBody").innerHTML = `
+                  <tr>
+                     <td colspan="5" class="text-center py-6 text-red-400 text-lg">
+                        Service paused by owner.<br><br>
+                        <h6 style="color:white;">The data service is currently paused due to domain/usage limits. We apologize for the inconvenience. Please <a href="https://siddartha57.github.io/My-Portfolio/contact.html" style="color:#0cf52f;">contact</a> the owner for any required details.</h6>
+                     </td>
+                  </tr>`;
+         }
+      }
+
+      // Run automatically on page load
+      loadAllJobs();
+   </script>
+
+</html>

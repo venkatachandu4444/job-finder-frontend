@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+   <head>
+      <meta charset="utf-8"/>
+      <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+      <title>Job Search Results - JobFinder</title>
+      <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+      <link href="https://fonts.googleapis.com" rel="preconnect"/>
+      <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+      <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+      <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+      <style>
+         body {
+         background-color: #142211; /* Fallback */
+         background-image: radial-gradient(circle at top left, rgba(79, 232, 48, 0.1), transparent 40%), 
+         radial-gradient(circle at bottom right, rgba(79, 232, 48, 0.15), transparent 50%);
+         }
+         .glassmorphism {
+         background: rgba(42, 71, 36, 0.25); /* Semi-transparent background */
+         -webkit-backdrop-filter: blur(20px); /* For Safari */
+         backdrop-filter: blur(20px); /* Standard */
+         border: 1px solid rgba(60, 101, 52, 0.5); /* Subtle border */
+         }
+         .table-row-glass:nth-child(even) {
+         background: rgba(42, 71, 36, 0.1);
+         }
+         .table-row-glass:hover {
+         background: rgba(79, 232, 48, 0.1);
+         box-shadow: inset 0 0 20px rgba(79, 232, 48, 0.1);
+         }
+      </style>
+      <script>
+         tailwind.config = {
+             darkMode: "class",
+             theme: {
+                 extend: {
+                     colors: {
+                         "primary": "#4fe830",
+                         "background-light": "#f6f8f6",
+                         "background-dark": "#142111",
+                         "brand": {
+                             "dark-green": "#142211",
+                             "mid-green": "#1e321a",
+                             "border-green": "#2a4724",
+                             "subtle-border": "#3c6534",
+                             "text-green": "#9cc893",
+                         }
+                     },
+                     fontFamily: {
+                         "display": ["Manrope", "sans-serif"]
+                     },
+                     borderRadius: {
+                         "DEFAULT": "0.5rem",
+                         "lg": "1rem",
+                         "xl": "1.5rem",
+                         "full": "9999px"
+                     },
+                 },
+             },
+         }
+      </script>
+   </head>
+   <body class="font-display bg-background-dark text-white">
+      <div class="relative flex h-auto min-h-screen w-full flex-col">
+         <div class="layout-container flex h-full grow flex-col">
+            <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+               <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4 text-white">
+                     <div class="size-6 text-primary">
+                        <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                           <path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                     </div>
+                     <h2 class="text-white text-xl font-bold">JobFinder</h2>
+                  </div>
+               </div>
+            </header>
+            <main class="flex-1 flex flex-col items-center justify-start py-8 sm:py-12 px-4">
+               <div class="w-full max-w-7xl">
+                  <div class="mb-8">
+                     <a class="glassmorphism flex w-fit cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 gap-2 text-sm font-bold tracking-wide transition-all hover:border-primary/50" href="index.html">
+                     <span class="material-symbols-outlined text-xl">arrow_back</span>
+                     <span>BACK</span>
+                     </a>
+                  </div>
+                  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-4">Search Results</h1>
+                  <p id="searchHeading" class="text-center text-brand-text-green max-w-2xl mx-auto mb-10"></p>
+                  <div class="w-full px-4 @container">
+                     <div class="flex overflow-hidden rounded-xl glassmorphism">
+                        <div class="overflow-x-auto w-full">
+                           <table class="min-w-full w-full text-left">
+                              <thead class="border-b border-brand-subtle/50">
+                                 <tr class="bg-black/10">
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-white tracking-wider w-[25%]">Job Title</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-white tracking-wider w-[20%]">Company</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-white tracking-wider w-[20%]">Location</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-white tracking-wider w-[20%]">Registration Close Date</th>
+                                    <th class="px-6 py-4 text-left text-sm font-semibold text-primary tracking-wider w-[15%]">Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody id="jobsTableBody"></tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+            </main>
+            <footer class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+               <div class="flex flex-col gap-6 px-5 py-10 text-center border-t border-brand-border-green">
+                  <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+                     <a class="text-brand-text-green text-sm font-normal leading-normal transition-colors hover:text-white" href="#">About</a>
+                     <a class="text-brand-text-green text-sm font-normal leading-normal transition-colors hover:text-white" href="#">Privacy Policy</a>
+                     <a class="text-brand-text-green text-sm font-normal leading-normal transition-colors hover:text-white" href="#">Terms of Service</a>
+                     <a class="text-brand-text-green text-sm font-normal leading-normal transition-colors hover:text-white" href="https://siddartha57.github.io/My-Portfolio/contact.html">Contact</a>
+                  </div>
+                  <p class="text-brand-text-green text-sm font-normal leading-normal">© 2025 JobFinder. All rights reserved.</p>
+               </div>
+            </footer>
+         </div>
+      </div>
+   </body>
+   <script>
+        async function loadJobs() {
+            const params = new URLSearchParams(window.location.search);
+            const keyword = params.get("keyword") || "";
+            const location = params.get("location") || "india";
+
+            document.getElementById("searchHeading").innerHTML =
+                `Showing jobs for <span class="text-white font-semibold">"${keyword}"</span> in <span class="text-white font-semibold">"${location}"</span>.`;
+
+            // UPDATED URL FOR RENDER API
+            const url = `https://job-finder-5kr0.onrender.com/api/search?keyword=${keyword}&location=${location}`;
+
+            const response = await fetch(url);
+            const jobs = await response.json();
+
+            const tableBody = document.getElementById("jobsTableBody");
+            tableBody.innerHTML = "";
+
+            if (jobs.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center py-6 text-brand-text-green text-lg">
+                            No jobs found for your search.
+                        </td>
+                    </tr>`;
+                return;
+            }
+
+            jobs.forEach(job => {
+                const closeDate = job.registration_close_date || "Closes Soon";
+
+                tableBody.innerHTML += `
+                    <tr class="table-row-glass border-t border-brand-subtle/30">
+                        <td class="px-6 py-4 text-white text-sm font-semibold">${job.title}</td>
+                        <td class="px-6 py-4 text-brand-text-green text-sm">${job.company || "Unknown"}</td>
+                        <td class="px-6 py-4 text-brand-text-green text-sm">${job.location}</td>
+                        <td class="px-6 py-4 text-brand-text-green text-sm">${closeDate}</td>
+                        <td class="px-6 py-4">
+                            <a href="${job.source_link}" target="_blank">
+                                <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary/20 text-primary text-sm font-bold transition-all hover:bg-primary hover:text-background-dark">
+                                    Apply
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        loadJobs();
+    </script>
+
+
+</html>
